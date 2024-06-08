@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+// Services
+service VotingService {
+    rpc ListCandidates(Empty) returns (CandidateList) {}
+
+    rpc Vote(VoteRequest) returns (VoteResponse) {}
+
+    rpc GetResults(Empty) returns (Candidate) {}
+}
+
+
+// Messages
+message Empty {}
+
+message VoteRequest {
+    int32 candidateId = 1;
+}
+
+message VoteResponse {
+    string message = 1;
+    string name = 2;
+}
+
+message Candidate {
+    int32 id = 1;
+    string name = 2;
+    int32 votes = 3;
+}
+
+message CandidateList {
+    repeated Candidate candidates = 1;
+}
