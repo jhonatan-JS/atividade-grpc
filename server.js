@@ -38,19 +38,10 @@ votingServer.addService(votingProto.service, {
     const candidates = votes.map((candidate) => ({
       id: candidate.candidateId,
       name: candidate.name,
-    }));
-
-    callback(null, { candidates: candidates });
-  },
-
-  getResults: (call, callback) => {
-    const results = votes.map((candidate) => ({
-      id: candidate.candidateId,
-      name: candidate.name,
       votes: candidate.votes,
     }));
 
-    callback(null, { results: results });
+    callback(null, { candidates });
   },
 });
 

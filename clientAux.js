@@ -10,8 +10,18 @@ const client = new tallyProto.VotingService(
 );
 
 const getResults = () => {
-  client.GetResults({}, (err, response) => {
-    console.log("Resultado da apuração:", response);
+  client.CountVotes({}, (err, response) => {
+    if (err) {
+      console.log("Erro ao obter resultados:", err);
+      return;
+    }
+
+    const candidates = response.candidates;
+    candidates.forEach((candidate) => {
+      console.log(
+        `\nCandidato: ${candidate.name} \nQtd. de Votos: ${candidate.votes}`
+      );
+    });
   });
 };
 

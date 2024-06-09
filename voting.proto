@@ -6,7 +6,7 @@ service VotingService {
 
     rpc Vote(VoteRequest) returns (VoteResponse) {}
 
-    rpc GetResults(Empty) returns (Candidate) {}
+    rpc CountVotes(Empty) returns (CandidateList) {}
 }
 
 

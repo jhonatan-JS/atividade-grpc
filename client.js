@@ -22,8 +22,7 @@ const vote = (candidateId) => {
       return;
     }
 
-    console.log("Resposta do voto:", response.message);
-    console.log("Candidato: ", response.name);
+    console.log(`\n${response.message} para o candidato ${response.name}`);
     scanLine.close();
   });
 };
@@ -38,7 +37,7 @@ const ListCandidates = () => {
     }
 
     candidates.map((candidate) => {
-      console.log(`ID: ${candidate.id} - Nome: ${candidate.name}`);
+      console.log(`Candidato: (${candidate.id}) - ${candidate.name}`);
     });
   });
 };

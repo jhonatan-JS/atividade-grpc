@@ -17,16 +17,20 @@ const votingClient = new (loadPackageDefinition(tallyDefs).VotingService)(
 const tallyServer = new Server();
 
 tallyServer.addService(tallyProto.service, {
-  GetResults: (call, callback) => {
-    console.log("🔥 Apuração solicitada", callback.response);
-
-    votingClient.getResults({}, (err, response) => {
+  CountVotes: (call, callback) => {
+    votingClient.ListCandidates({}, (err, response) => {
       if (err) {
-        console.log(`🤯 Erro ao buscar resultado: ${err.message}`);
+        callback(err);
         return;
       }
 
-      callback(null, { results: response.results });
+      const candidates = response.candidates.map((candidate) => ({
+        id: candidate.id,
+        name: candidate.name,
+        votes: candidate.votes,
+      }));
+
+      callback(null, { candidates });
     });
   },
 });
