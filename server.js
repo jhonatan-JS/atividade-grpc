@@ -55,5 +55,6 @@ votingServer.bindAsync(
       return;
     }
     console.log(`🚀 Servidor de Votação rodando na porta: ${serverAddress}`);
+    votingServer.start();
   }
 );

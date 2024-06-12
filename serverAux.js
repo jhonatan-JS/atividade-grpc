@@ -45,5 +45,6 @@ tallyServer.bindAsync(
       return;
     }
     console.log(`🚀 Servidor de Apuração rodando na porta: ${serverAddress}`);
+    tallyServer.start();
   }
 );
