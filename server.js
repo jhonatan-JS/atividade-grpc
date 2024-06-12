@@ -9,10 +9,16 @@ const votingDefs = loadSync("./voting.proto");
 const votingProto = loadPackageDefinition(votingDefs).VotingService;
 
 const votes = [
-  { candidateId: 1, name: "Paulo teixeira Alencar", votes: 0 },
-  { candidateId: 2, name: "José Pedro", votes: 0 },
-  { candidateId: 3, name: "Ana Luiza", votes: 0 },
-  { candidateId: 4, name: "Marcela pereira da Cunha", votes: 0 },
+  { candidateId: 1, name: "João da Silva", votes: 0 },
+  { candidateId: 2, name: "Fernando Santos", votes: 0 },
+  { candidateId: 3, name: "Carlos Oliveira", votes: 0 },
+  { candidateId: 4, name: "Ricardo Almeida", votes: 0 },
+  { candidateId: 5, name: "Felipe Martins", votes: 0 },
+  { candidateId: 6, name: "Dilma Ferreira", votes: 0 },
+  { candidateId: 7, name: "Mariana Costa", votes: 0 },
+  { candidateId: 8, name: "Fernanda Souza", votes: 0 },
+  { candidateId: 9, name: "Patrícia Lima", votes: 0 },
+  { candidateId: 10, name: "Renata Barbosa", votes: 0 },
 ];
 
 const votingServer = new Server();
@@ -29,7 +35,7 @@ votingServer.addService(votingProto.service, {
     }
 
     callback(null, {
-      message: "Voto registrado com sucesso.",
+      message: "📥 Voto registrado com sucesso",
       name: findCandidate.name,
     });
   },
