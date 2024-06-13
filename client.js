@@ -36,6 +36,40 @@ const ListCandidates = () => {
       return;
     }
 
+    const handleInput = (value) => {
+      if (isNaN(value)) {
+        console.log(
+          '❌ ID de candidato inválido. Por favor, insira um ID válido.'
+        );
+        return false;
+      }
+
+      if (value < 1 || value > candidates.length) {
+        console.log(
+          '❌ ID de candidato inválido. Por favor, insira um ID válido.'
+        );
+        return false;
+      }
+
+      return true;
+    };
+
+    setTimeout(() => {
+      scanLine.question(
+        '\nInsira o ID do candidato para votar: ',
+        (inputId) => {
+          const candidateId = parseInt(inputId);
+          const resultValidate = handleInput(candidateId);
+
+          if (!resultValidate) {
+            ListCandidates();
+            return;
+          }
+          vote(candidateId);
+        }
+      );
+    }, 100);
+
     candidates.map((candidate) => {
       console.log(`[${candidate.id}] - ${candidate.name}`);
     });
@@ -43,18 +77,3 @@ const ListCandidates = () => {
 };
 
 ListCandidates();
-
-setTimeout(() => {
-  scanLine.question('\nInsira o ID do candidato para votar: ', (inputId) => {
-    const candidateId = parseInt(inputId, 10);
-
-    if (isNaN(candidateId) || (candidateId < 1 && candidateId > 10)) {
-      console.log(
-        '❌ ID de candidato inválido. Por favor, insira um ID válido.'
-      );
-      scanLine.close();
-    } else {
-      vote(candidateId);
-    }
-  });
-}, 100);
