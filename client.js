@@ -1,8 +1,8 @@
-import { loadPackageDefinition, credentials } from '@grpc/grpc-js';
-import { loadSync } from '@grpc/proto-loader';
-import readline from 'readline';
+import { loadPackageDefinition, credentials } from "@grpc/grpc-js";
+import { loadSync } from "@grpc/proto-loader";
+import readline from "readline";
 
-const votingDefs = loadSync('./voting.proto');
+const votingDefs = loadSync("./voting.proto");
 const votingProto = loadPackageDefinition(votingDefs);
 
 const scanLine = readline.createInterface({
@@ -11,18 +11,18 @@ const scanLine = readline.createInterface({
 });
 
 const client = new votingProto.VotingService(
-  '127.0.0.1:5051',
+  "127.0.0.1:5051",
   credentials.createInsecure()
 );
 
 const vote = (candidateId) => {
   client.Vote({ candidateId }, (err, response) => {
     if (err) {
-      console.log('❌ Erro ao votar:', err);
+      console.log("❌ Erro ao votar:", err);
       return;
     }
 
-    console.log(`\n${response.message} para [${response.name}]`);
+    console.log(`\n${response.message}`);
     scanLine.close();
   });
 };
@@ -32,21 +32,21 @@ const ListCandidates = () => {
     const candidates = response.candidates;
 
     if (err) {
-      console.log('❌ Erro ao listar candidatos:', err);
+      console.log("❌ Erro ao listar candidatos:", err);
       return;
     }
 
     const handleInput = (value) => {
       if (isNaN(value)) {
         console.log(
-          '❌ ID de candidato inválido. Por favor, insira um ID válido.'
+          "❌ ID de candidato inválido. Por favor, insira um ID válido."
         );
         return false;
       }
 
       if (value < 1 || value > candidates.length) {
         console.log(
-          '❌ ID de candidato inválido. Por favor, insira um ID válido.'
+          "❌ ID de candidato inválido. Por favor, insira um ID válido."
         );
         return false;
       }
@@ -56,7 +56,7 @@ const ListCandidates = () => {
 
     setTimeout(() => {
       scanLine.question(
-        '\nInsira o ID do candidato para votar: ',
+        "\nInsira o ID do candidato para votar: ",
         (inputId) => {
           const candidateId = parseInt(inputId);
           const resultValidate = handleInput(candidateId);
